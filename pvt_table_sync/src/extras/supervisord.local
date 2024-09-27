@@ -1,0 +1,12 @@
+; supervisord.conf
+
+[supervisord]
+nodaemon=true
+
+[program:uvicorn]
+command=python -m debugpy --wait-for-client --listen 0.0.0.0:5678 -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+directory=/app
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/app/extras/logs/main.log

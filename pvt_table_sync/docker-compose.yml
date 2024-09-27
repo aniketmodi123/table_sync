@@ -1,0 +1,23 @@
+version: '3.8'
+
+volumes:
+    psql_data: {}
+    redis_data: {}
+
+services:
+    pvt_table_sync:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile.local
+            args:
+                - PYTHON_VERSION=tiangolo/uvicorn-gunicorn-fastapi:python3.10-slim
+        image: 'pvt_table_sync_img'
+        container_name: pvt_table_sync_api
+        ports:
+            - 8010:8000
+            - 5010:5678
+        volumes:
+            - ./src:/app
+        env_file:
+            - ./.env
+

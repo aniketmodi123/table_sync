@@ -1,0 +1,12 @@
+; supervisord.conf
+
+[supervisord]
+nodaemon=true
+
+[program:uvicorn]
+command=uvicorn main:app --host 0.0.0.0 --reload
+directory=/app
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/app/extras/logs/main.log
